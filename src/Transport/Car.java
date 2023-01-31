@@ -2,13 +2,8 @@ package Transport;
 
 import java.time.LocalDate;
 
-public class Car {
-    private final String brand;
-    private final String model;
+public class Car extends Transport{
     private double engineVolume;
-    private final int year;
-    private String color;
-    private final String country;
     private String transmission;
     private final String typeOfBody;
     private String registrationNumber;
@@ -31,30 +26,12 @@ public class Car {
                boolean summerTyres,
                Insurance insurance,
                Key key) {
-        if (brand == null || brand.isEmpty()) {
-            brand = "default";
-        }
-        this.brand = brand;
-        if (model == null || model.isEmpty()) {
-            model = "default";
-        }
-        this.model = model;
-        if (engineVolume <= 0) {
-            engineVolume = 1.5;
-        }
+        super(brand, model,year,country,color);
+
         this.engineVolume = engineVolume;
         if (year <= 0) {
             year = 2000;
         }
-        this.year = year;
-        if (color == null || color.isEmpty()) {
-            color = "белый";
-        }
-        this.color = color;
-        if (country == null || country.isEmpty()) {
-            country = "default";
-        }
-        this.country = country;
         if (transmission == null || transmission.isEmpty()) {
             this.transmission = "МКПП";
         } else {
@@ -67,49 +44,34 @@ public class Car {
         }
         this.summerTyres = false;
         if (typeOfBody == null || typeOfBody.isEmpty()) {
-        this.typeOfBody = "седан";
+            this.typeOfBody = "седан";
         } else {
-        this.typeOfBody = typeOfBody;
+            this.typeOfBody = typeOfBody;
         }
         if (seatCount == 0) {
-        this.seatCount = 4;
+            this.seatCount = 4;
         } else {
-          this.seatCount = seatCount;
-         }
+            this.seatCount = seatCount;
+        }
         if (key == null) {
             this.key = new Key();
         } else {
-            this.key=key;
+            this.key = key;
         }
         if (insurance == null) {
             this.insurance = new Insurance();
         } else {
-            this.insurance=insurance;
+            this.insurance = insurance;
         }
     }
+
     public Car(String brand,
                String model,
                double engineVolume,
                int year,
                String color,
                String country) {
-        this(brand, model,engineVolume,year, color,country, "седан",4,"механка","x000xx000",true, new Insurance(), new Key());
-    }
-
-    public String getBrand() {
-        return brand;
-    }
-
-    public String getModel() {
-        return model;
-    }
-
-    public int getYear() {
-        return year;
-    }
-
-    public String getCountry() {
-        return country;
+        this(brand, model, engineVolume, year, color, country, "седан", 4, "механка", "x000xx000", true, new Insurance(), new Key());
     }
 
     public String getTypeOfBody() {
@@ -134,14 +96,6 @@ public class Car {
 
     public void setEngineVolume(double engineVolume) {
         this.engineVolume = engineVolume;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
     }
 
     public String getTransmission() {
@@ -196,7 +150,8 @@ public class Car {
         }
         return Character.isDigit(chars[1]) && Character.isDigit(chars[2]) && Character.isDigit(chars[3]) && Character.isDigit(chars[6]) && Character.isDigit(chars[7]) && Character.isDigit(chars[8]);
     }
-    public static class Key{
+
+    public static class Key {
         private final boolean remoteStart;
         private final boolean autoStart;
 
@@ -204,6 +159,7 @@ public class Car {
             this.remoteStart = remoteStart;
             this.autoStart = autoStart;
         }
+
         public Key() {
             this(false, false);
         }
@@ -263,8 +219,6 @@ public class Car {
                 System.out.println("Номер некорректный");
             }
         }
-
-
     }
 
 
